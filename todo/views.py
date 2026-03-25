@@ -1,8 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Task
 from .serializers import TaskSerializer
+from .models import User
+from .models import Task, User
+from .serializers import TaskSerializer, UserSerializer
 
 class TaskListCreateView(APIView):
 
@@ -32,3 +34,14 @@ class TaskDetailView(APIView):
         task = Task.objects.get(pk=pk)
         task.delete()
         return Response(status=204)
+        from .models import User
+from .serializers import UserSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class UserProfileView(APIView):
+
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
