@@ -23,3 +23,23 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+class Item(models.Model):
+    UNIT_CHOICES = [
+    # SI
+    ('kg', 'Kilogram'),
+    ('g', 'Gram'),
+
+    # Imperial
+    ('lb', 'Pound'),
+    ('oz', 'Ounce'),
+
+    # Common
+    ('packet', 'Packet'),
+    ('piece', 'Piece'),
+]
+    name = models.CharField(max_length=100)
+    unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name        
